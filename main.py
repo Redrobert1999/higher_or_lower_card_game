@@ -23,12 +23,23 @@ class CardDeck:
             shuffled = self.deck.pop(random.randrange(0,51,1))
             self.deck.append(shuffled)
 
+    def merge(self):
+        for card in range(len(self.discard)):
+            self.deck.append(self.discard.pop(0))
+
 
 deck_one = CardDeck()
 
 print("deck = " + str(deck_one.deck))
 deck_one.shuffle()
 print("shuffled deck = " + str(deck_one.deck))
+deck_one.top_card()
+deck_one.top_card()
+deck_one.top_card()
+deck_one.top_card()
+print("deck = " + str(deck_one.deck) + "\n discard = " + str(deck_one.discard))
+deck_one.merge()
+print("deck = " + str(deck_one.deck) + "\n discard = " + str(deck_one.discard))
 
 
 
