@@ -11,5 +11,4 @@ class CardDeck:
             card_value += 1
 
 
-deck_one = CardDeck()
-print(deck_one.deck)
+
