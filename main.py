@@ -19,7 +19,7 @@ class CardDeck:
         return top_card
 
     def shuffle(self):
-        for i in range(100):
+        for i in range(500):
             shuffled = self.deck.pop(random.randrange(0, 51, 1))
             self.deck.append(shuffled)
 
@@ -51,7 +51,8 @@ def main_menu():
     elif main_screen_select.upper() == "START":
         higher_or_lower()
 
-def card_value(card):
+def card_value(card_list):
+    card = str(card_list)
     value = 0
     if "Ace" in card: value = 1
     elif "Two" in card: value = 2
@@ -66,10 +67,12 @@ def card_value(card):
     elif "Jack" in card: value = 11
     elif "Queen" in card: value = 12
     elif "King" in card: value = 13
+    else: value = 20
     return value
 
 
 deck_one = CardDeck
+
 
 
 
@@ -79,28 +82,36 @@ def higher_or_lower():
     count = 0
     current_card = deck_one.top_card(deck_one)
     next_card = deck_one.top_card(deck_one)
-    current_card_value = card_value(current_card)
-    next_card_value = card_value(next_card)
+
     while deck_one.deck != []:
+        current_card_value = card_value(current_card)
+        next_card_value = card_value(next_card)
         print("Score = ", count)
         high_or_low = input(current_card)
-        if (current_card_value < next_card_value and high_or_low.upper() == "HIGHER") or (current_card_value > next_card_value and high_or_low.upper() == "LOWER"):
-            print("Correct!")
-            current_card = next_card
-            next_card = deck_one.top_card
-            current_card_value = card_value(current_card)
-            next_card_value = card_value(next_card)
-            count += 1
+        if high_or_low.upper() == "HIGHER":
+            if current_card_value < next_card_value:
+                count += 1
+                print("Correct!")
+                current_card = next_card
+                next_card = deck_one.top_card(deck_one)
+            else:
+                print(next_card)
+                break
+        elif high_or_low.upper() == "LOWER":
+            if current_card_value > next_card_value:
+                count += 1
+                print("Correct!")
+                current_card = next_card
+                next_card = deck_one.top_card(deck_one)
+            else:
+                print(next_card)
+                break
         else:
             print(next_card)
             break
 
     print("Game Over! Score = ", count)
-    game_over = input("Type \"Back\" to go back to the main menu or \"Retry\" for another game")
-    if game_over.upper() == "BACK":
-        main_menu()
-    elif game_over.upper() == "Retry":
-        higher_or_lower()
+    main_menu()
 
 
 main_menu()
