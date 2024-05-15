@@ -1,5 +1,6 @@
 import random
 
+
 class CardDeck:
 
     deck = []
@@ -7,11 +8,10 @@ class CardDeck:
     suits = ["Spades", "Hearts", "Clubs", "Diamonds"]
     faces = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
 
-    #List goes from [Top, ... , Bottom]
+    # List goes from [Top, ... , Bottom]
     for suit in suits:
         for face in faces:
             deck.append([face + " of " + suit])
-
 
     def top_card(self):
         top_card = self.deck[0]
@@ -20,7 +20,7 @@ class CardDeck:
 
     def shuffle(self):
         for i in range(100):
-            shuffled = self.deck.pop(random.randrange(0,51,1))
+            shuffled = self.deck.pop(random.randrange(0, 51, 1))
             self.deck.append(shuffled)
 
     def merge(self):
@@ -28,6 +28,7 @@ class CardDeck:
         for card in range(len(self.discard)):
             self.deck.insert(index, self.discard.pop(0))
             index += 1
+
 
 def main_menu():
     print("Welcome to project_one! My first proper Python project using stuff I learned.")
@@ -48,10 +49,38 @@ def main_menu():
         if back.upper() == "BACK":
             main_menu()
     elif main_screen_select.upper() == "START":
-        pass
+        higher_or_lower()
+
+
+deck_one = CardDeck
+
+
+
+def higher_or_lower():
+    deck_one.merge(deck_one)
+    deck_one.shuffle(deck_one)
+    count = 0
+    current_card = deck_one.top_card(deck_one)
+    next_card = deck_one.top_card(deck_one)
+    while deck_one.deck != []:
+        print("Score = ", count)
+        high_or_low = input(current_card)
+        if (current_card < next_card and high_or_low.upper() == "HIGHER") or (current_card > next_card and high_or_low.upper() == "LOWER"):
+            print("Correct!")
+            current_card = next_card
+            next_card = deck_one.top_card
+            count += 1
+        else:
+            print(next_card)
+            break
+
+    print("Game Over! Score = ", count)
+    game_over = input("Type \"Back\" to go back to the main menu or \"Retry\" for another"
+                      "game")
+    if game_over.upper() == "BACK":
+        main_menu()
+    elif game_over.upper() == "Retry":
+        higher_or_lower()
+
 
 main_menu()
-
-
-
-
