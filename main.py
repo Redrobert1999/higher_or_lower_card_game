@@ -24,22 +24,33 @@ class CardDeck:
             self.deck.append(shuffled)
 
     def merge(self):
+        index = 0
         for card in range(len(self.discard)):
-            self.deck.append(self.discard.pop(0))
+            self.deck.insert(index, self.discard.pop(0))
+            index += 1
 
+def main_menu():
+    print("Welcome to project_one! My first proper Python project using stuff I learned.")
+    print("Here is just a basic game of Higher or Lower.")
+    main_screen_select = input("Type \"Start\" to start or \"Instructions\" for how to play the game.")
+    if main_screen_select.upper() == "INSTRUCTIONS":
+        print("""Welcome to Higher or Lower! The rules are simple:
+                 A card will appear on screen and you have to guess whether the next
+                 card will be of higher or lower value.
+                 All numbered cards will be their respective value with Ace's having
+                 a value of one, Jack's a value of 11, Queen's a value of twelve and
+                 King's a value of 13.
+                 Any draws will count as a loss.
+                 The game ends when you guess incorrectly, get a draw or run out of 
+                 cards in the deck (a standard 52 card deck).
+                 Good luck!""")
+        back = input("Type \"Back\" to return to main menu")
+        if back.upper() == "BACK":
+            main_menu()
+    elif main_screen_select.upper() == "START":
+        pass
 
-deck_one = CardDeck()
-
-print("deck = " + str(deck_one.deck))
-deck_one.shuffle()
-print("shuffled deck = " + str(deck_one.deck))
-deck_one.top_card()
-deck_one.top_card()
-deck_one.top_card()
-deck_one.top_card()
-print("deck = " + str(deck_one.deck) + "\n discard = " + str(deck_one.discard))
-deck_one.merge()
-print("deck = " + str(deck_one.deck) + "\n discard = " + str(deck_one.discard))
+main_menu()
 
 
 
